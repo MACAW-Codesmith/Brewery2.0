@@ -24,8 +24,10 @@ const Home = () => {
     if (document.cookie) {
       const cookieObj = parseCookie(document.cookie);
       async function checkCookie() {
-        const userObj = await axios.get(`/getUser/${cookieObj.userName}`)
-        if (userObj.hasCookie) setUser(userObj.data);
+        const response = await axios.get(`/getUser/${cookieObj.userName}`)
+        const userObj = response.data;
+        console.log(userObj);
+        if (userObj.hascookie === 'true') setUser(userObj);
         else console.log('cookie not found in db')
       }
       // only invoke the above function if there is a userName in the cookieObj
